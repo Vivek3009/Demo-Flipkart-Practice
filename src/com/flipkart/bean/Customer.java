@@ -47,4 +47,8 @@ public class Customer {
 	public void setCustomerAddress(String customerAddress) {
 		this.customerAddress = customerAddress;
 	}
+	
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
 }

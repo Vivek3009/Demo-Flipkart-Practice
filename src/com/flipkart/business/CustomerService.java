@@ -3,6 +3,9 @@
  */
 package com.flipkart.business;
 
+import java.util.ArrayList;
+
+import com.flipkart.bean.*;
 /**
  * @author vivek
  *
@@ -10,22 +13,51 @@ package com.flipkart.business;
 public class CustomerService {
 	// The service class implementation all the operation for creating,updating,deleting customers
 	
-	public void createCustomer() {
+	ArrayList<Customer> customer = new ArrayList<>();
+	
+	public void createCustomer(int customerId, String customerName, String customerAddress) {
 		
-		System.out.println("Customer is created");
+		
+		// Creating new Customer
+		Customer tempCustomer = new Customer();
+		tempCustomer.setCustomerId(customerId);
+		tempCustomer.setCustomerName(customerName);
+		tempCustomer.setCustomerAddress(customerAddress);
+		
+		// Adding new Customer into customer list
+		
+		customer.add(tempCustomer);
+		
 	}
 	
-	public void updateCustomer() {
+	public void updateCustomer(int customerId,String newCusutomerName,String newCustomerAddress) {
 		
-		System.out.println("Customer is updated");
+		// Finding the desire customer with given customer id
+		for(Customer cur : customer) {
+			
+			if(cur.getCustomerId() == customerId) {
+				cur.setCustomerName(newCusutomerName);
+				cur.setCustomerAddress(newCustomerAddress);
+			}
+		}
 	}
 
-	public void deleteCustomer() {
-	
-	System.out.println("Customer is deleted");
+	public void deleteCustomer(int customerId) {
+		
+		// first will get the index of that specific customer with given customerId and than will remove it form list
+		
+		int getIndexOfCustomer = 0;
+		for(Customer cur : customer) {
+			
+			if(cur.getCustomerId() == customerId) {
+	              break;
+			}
+			getIndexOfCustomer += 1;
+		}
+		this.customer.remove(getIndexOfCustomer);
 	}
 	public void listCustomer() {
 		
-		System.out.println("Customer is listed");
+		this.customer.forEach((cus) -> System.out.println(cus.getCustomerId() + " " + cus.getCustomerName() + " " + cus.getCustomerAddress()));
 	}
 }
